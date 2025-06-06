@@ -1,0 +1,57 @@
+Barr	De Siwenna	ennemi
+Barr	Cléon	ami
+Barr	Sa Majesté Impériale	ami
+Barr	Luk	ami
+Barr	Lathan Devers	ennemi
+Barr	Le Maire	ennemi
+Barr	Forell	ennemi
+Siwennien	Le Maire	ennemi
+Siwennien	Barr	ennemi
+Seldon	De Siwenna	ami
+Seldon	Seigneur	ami
+Seldon	Randu	ennemi
+Seldon	Mis	ami
+De Siwenna	Seldon	ami
+De Siwenna	Le Maire	ami
+De Siwenna	Cléon	ami
+De Siwenna	Sa Majesté Impériale	ami
+De Siwenna	Lathan Devers	ennemi
+Hober Mallow	Hardin	ami
+Sire	Brodrig	ennemi
+Brodrig	De Siwenna	neutre
+Brodrig	Barr	ennemi
+Brodrig	Lathan Devers	ennemi
+Brodrig	Le Maire	neutre
+Bel Riose	Sa Majesté Impériale	ami
+Cléon	Sa Majesté Impériale	ami
+Cléon	De Siwenna	ami
+Sa Majesté Impériale	De Siwenna	ami
+Luk	Lathan Devers	ami
+Lathan Devers	De Siwenna	ennemi
+Lathan Devers	Forell	neutre
+Loris	Lathan Devers	ennemi
+Fran Cilla	Cléon	ennemi
+Fran Cilla	Le Maire	ennemi
+Fran Cilla	Randu	ennemi
+Indbur	Le Maire	ami
+Indbur	Mis	ennemi
+Le Maire	Indbur	ami
+Le Maire	Randu	neutre
+Giganticus	Bobo	ami
+Vénéré	Seigneur	ami
+Seigneur	Vénéré	ami
+Seigneur	Han Pritcher	ennemi
+Seigneur	Mangin	neutre
+Mis	Indbur	ennemi
+Mis	Le Maire	ennemi
+Mis	Magnifico	ennemi
+Mis	Randu	ennemi
+Mis	Filia	ami
+Mis	Han Pritcher	ennemi
+Mnemon	Ovall Gri	neutre
+Mnémon	Le Maire	ennemi
+Renard	Le Maire	ami
+Magnifico	Mis	ennemi
+Inchney	Jord Commason	neutre
+Torie	Mis	ami
+Torie	Magnifico	ennemi

@@ -1,0 +1,167 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#f94144", "id": "Barr", "label": "Barr", "shape": "dot", "size": 15}, {"color": "#f3722c", "id": "De Siwenna", "label": "De Siwenna", "shape": "dot", "size": 15}, {"color": "#f3722c", "id": "Cl\u00e9on", "label": "Cl\u00e9on", "shape": "dot", "size": 15}, {"color": "#f3722c", "id": "Sa Majest\u00e9 Imp\u00e9riale", "label": "Sa Majest\u00e9 Imp\u00e9riale", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Luk", "label": "Luk", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Lathan Devers", "label": "Lathan Devers", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Le Maire", "label": "Le Maire", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Forell", "label": "Forell", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Siwennien", "label": "Siwennien", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Seldon", "label": "Seldon", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Seigneur", "label": "Seigneur", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Randu", "label": "Randu", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Mis", "label": "Mis", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Hober Mallow", "label": "Hober Mallow", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Hardin", "label": "Hardin", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Sire", "label": "Sire", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Brodrig", "label": "Brodrig", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Bel Riose", "label": "Bel Riose", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Loris", "label": "Loris", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Fran Cilla", "label": "Fran Cilla", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Indbur", "label": "Indbur", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Giganticus", "label": "Giganticus", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Bobo", "label": "Bobo", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "V\u00e9n\u00e9r\u00e9", "label": "V\u00e9n\u00e9r\u00e9", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Han Pritcher", "label": "Han Pritcher", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Mangin", "label": "Mangin", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Magnifico", "label": "Magnifico", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Filia", "label": "Filia", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Mnemon", "label": "Mnemon", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Ovall Gri", "label": "Ovall Gri", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Mn\u00e9mon", "label": "Mn\u00e9mon", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Renard", "label": "Renard", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Inchney", "label": "Inchney", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Jord Commason", "label": "Jord Commason", "shape": "dot", "size": 15}, {"color": "#97c2fc", "id": "Torie", "label": "Torie", "shape": "dot", "size": 15}]);
+                  edges = new vis.DataSet([{"color": "red", "from": "Barr", "to": "De Siwenna", "width": 63.16065216064453}, {"color": "green", "from": "Barr", "to": "Cl\u00e9on", "width": 2.1372177600860596}, {"color": "green", "from": "Barr", "to": "Sa Majest\u00e9 Imp\u00e9riale", "width": 2.1372177600860596}, {"color": "green", "from": "Barr", "to": "Luk", "width": 1.7039820551872253}, {"color": "red", "from": "Barr", "to": "Lathan Devers", "width": 12.680883407592773}, {"color": "red", "from": "Barr", "to": "Le Maire", "width": 1.9421130418777466}, {"color": "red", "from": "Barr", "to": "Forell", "width": 4.352841377258301}, {"color": "red", "from": "Barr", "to": "Siwennien", "width": 3.241457223892212}, {"color": "red", "from": "Barr", "to": "Brodrig", "width": 1.846686601638794}, {"color": "green", "from": "De Siwenna", "to": "Seldon", "width": 10.007271766662598}, {"color": "green", "from": "De Siwenna", "to": "Le Maire", "width": 2.7119410037994385}, {"color": "green", "from": "De Siwenna", "to": "Cl\u00e9on", "width": 2.1372177600860596}, {"color": "green", "from": "De Siwenna", "to": "Sa Majest\u00e9 Imp\u00e9riale", "width": 2.1372177600860596}, {"color": "red", "from": "De Siwenna", "to": "Lathan Devers", "width": 2.939702033996582}, {"color": "gray", "from": "De Siwenna", "to": "Brodrig", "width": 1.1957147121429443}, {"color": "green", "from": "Cl\u00e9on", "to": "Sa Majest\u00e9 Imp\u00e9riale", "width": 2.1372177600860596}, {"color": "red", "from": "Cl\u00e9on", "to": "Fran Cilla", "width": 4.454636335372925}, {"color": "green", "from": "Sa Majest\u00e9 Imp\u00e9riale", "to": "Bel Riose", "width": 2.0843714475631714}, {"color": "green", "from": "Luk", "to": "Lathan Devers", "width": 1.7039820551872253}, {"color": "red", "from": "Lathan Devers", "to": "Brodrig", "width": 4.971498012542725}, {"color": "gray", "from": "Lathan Devers", "to": "Forell", "width": 1.194089412689209}, {"color": "red", "from": "Lathan Devers", "to": "Loris", "width": 1.9908661246299744}, {"color": "red", "from": "Le Maire", "to": "Siwennien", "width": 1.9497501850128174}, {"color": "gray", "from": "Le Maire", "to": "Brodrig", "width": 1.0271960496902466}, {"color": "red", "from": "Le Maire", "to": "Fran Cilla", "width": 3.8410584926605225}, {"color": "green", "from": "Le Maire", "to": "Indbur", "width": 8.081480026245117}, {"color": "gray", "from": "Le Maire", "to": "Randu", "width": 1.390672206878662}, {"color": "red", "from": "Le Maire", "to": "Mis", "width": 1.64267897605896}, {"color": "red", "from": "Le Maire", "to": "Mn\u00e9mon", "width": 2.7504119873046875}, {"color": "green", "from": "Le Maire", "to": "Renard", "width": 5.224820137023926}, {"color": "green", "from": "Seldon", "to": "Seigneur", "width": 4.203367471694946}, {"color": "red", "from": "Seldon", "to": "Randu", "width": 4.3609819412231445}, {"color": "green", "from": "Seldon", "to": "Mis", "width": 3.3165512084960938}, {"color": "green", "from": "Seigneur", "to": "V\u00e9n\u00e9r\u00e9", "width": 10.611719131469727}, {"color": "red", "from": "Seigneur", "to": "Han Pritcher", "width": 3.9684691429138184}, {"color": "gray", "from": "Seigneur", "to": "Mangin", "width": 1.3167881965637207}, {"color": "red", "from": "Randu", "to": "Fran Cilla", "width": 2.505341053009033}, {"color": "red", "from": "Randu", "to": "Mis", "width": 2.363063335418701}, {"color": "red", "from": "Mis", "to": "Indbur", "width": 2.983544111251831}, {"color": "red", "from": "Mis", "to": "Magnifico", "width": 1.9984703063964844}, {"color": "green", "from": "Mis", "to": "Filia", "width": 4.722695350646973}, {"color": "red", "from": "Mis", "to": "Han Pritcher", "width": 3.6882476806640625}, {"color": "green", "from": "Mis", "to": "Torie", "width": 2.1539788246154785}, {"color": "green", "from": "Hober Mallow", "to": "Hardin", "width": 1.9266881346702576}, {"color": "red", "from": "Sire", "to": "Brodrig", "width": 1.4378516674041748}, {"color": "green", "from": "Giganticus", "to": "Bobo", "width": 2.7295660972595215}, {"color": "red", "from": "Magnifico", "to": "Torie", "width": 2.7613184452056885}, {"color": "gray", "from": "Mnemon", "to": "Ovall Gri", "width": 1.1767712235450745}, {"color": "gray", "from": "Inchney", "to": "Jord Commason", "width": 1.142356514930725}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
